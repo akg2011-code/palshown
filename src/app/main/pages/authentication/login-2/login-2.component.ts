@@ -1,3 +1,4 @@
+import { LoginService } from './login.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -5,14 +6,13 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-    selector     : 'login-2',
-    templateUrl  : './login-2.component.html',
-    styleUrls    : ['./login-2.component.scss'],
+    selector: 'login-2',
+    templateUrl: './login-2.component.html',
+    styleUrls: ['./login-2.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class Login2Component implements OnInit
-{
+export class Login2Component implements OnInit {
     loginForm: FormGroup;
 
     /**
@@ -23,19 +23,19 @@ export class Login2Component implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
-    )
-    {
+        private _formBuilder: FormBuilder,
+        private loginService: LoginService
+    ) {
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
-                navbar   : {
+                navbar: {
                     hidden: true
                 },
-                toolbar  : {
+                toolbar: {
                     hidden: true
                 },
-                footer   : {
+                footer: {
                     hidden: true
                 },
                 sidepanel: {
@@ -52,11 +52,17 @@ export class Login2Component implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
+            userName: ['', Validators.required],
             password: ['', Validators.required]
         });
+
+    }
+
+    login() {
+        return this.loginService.loginUser(this.loginForm.value).subscribe(res => {
+            console.log('this.loginForm :>> ', res)
+        })
     }
 }

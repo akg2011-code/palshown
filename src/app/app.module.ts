@@ -23,28 +23,29 @@ import { LayoutModule } from 'app/layout/layout.module';
 
 const appRoutes: Routes = [
     {
-        path        : 'apps',
+        path: 'apps',
         loadChildren: './main/apps/apps.module#AppsModule'
     },
     {
-        path        : 'pages',
+        path: 'pages',
         loadChildren: './main/pages/pages.module#PagesModule'
     },
     {
-        path        : 'ui',
+        path: 'ui',
         loadChildren: './main/ui/ui.module#UIModule'
     },
     {
-        path        : 'documentation',
+        path: 'documentation',
         loadChildren: './main/documentation/documentation.module#DocumentationModule'
     },
     {
-        path        : 'angular-material-elements',
+        path: 'angular-material-elements',
         loadChildren: './main/angular-material-elements/angular-material-elements.module#AngularMaterialElementsModule'
     },
     {
-        path      : '**',
-        redirectTo: 'apps/dashboards/analytics'
+        path: '**',
+        // redirectTo: 'apps/dashboards/analytics'
+        redirectTo: '/pages/auth/login-2'
     }
 ];
 
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -60,7 +61,7 @@ const appRoutes: Routes = [
 
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
+            delay: 0,
             passThruUnknownUrl: true
         }),
 
@@ -82,10 +83,9 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
