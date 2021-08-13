@@ -17,6 +17,13 @@ login-2 {
             .logo {
                 width: 128px;
                 margin-bottom: 32px;
+                img {
+                    max-width: 250%;
+                    height: auto;
+                    vertical-align: top;
+                    border: none;
+                    filter: drop-shadow(2px 4px 6px black);
+                }
             }
 
             .title {
