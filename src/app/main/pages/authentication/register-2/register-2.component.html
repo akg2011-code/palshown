@@ -1,26 +1,4 @@
 <div id="register" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
-    <div id="register-intro" fxFlex fxHide fxShow.gt-xs>
-        <div class="logo" [@animate]="{ value: '*', params: { scale: '0.2' } }">
-            <img src="assets/images/logos/Final-ai.png" />
-        </div>
-
-        <div
-            class="title"
-            [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }"
-        >
-            Welcome to the Palshown
-        </div>
-
-        <div
-            class="description"
-            [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }"
-        >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            ullamcorper nisl erat, vel convallis elit fermentum pellentesque.
-            Sed mollis velit facilisis facilisis viverra.
-        </div>
-    </div>
-
     <div
         id="register-form-wrapper"
         fusePerfectScrollbar
@@ -44,6 +22,15 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="username" />
+                    <mat-icon matSuffix class="secondary-text"
+                        >account_circle</mat-icon
+                    >
+                    <mat-error> User Name is required </mat-error>
+                </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
                     <input matInput formControlName="email" />
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
@@ -57,7 +44,7 @@
                     >
                         Please enter a valid email address
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
@@ -72,7 +59,7 @@
                     <mat-error> Password is required </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>Password (Confirm)</mat-label>
                     <input
                         matInput
@@ -103,7 +90,7 @@
                     >
                         Passwords must match
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <div class="terms" fxLayout="row" fxLayoutAlign="center center">
                     <mat-checkbox name="terms" aria-label="Accept" required>
@@ -118,6 +105,7 @@
                     class="submit-button"
                     aria-label="CREATE AN ACCOUNT"
                     [disabled]="registerForm.invalid"
+                    (click)="regiter()"
                 >
                     CREATE AN ACCOUNT
                 </button>
@@ -131,6 +119,28 @@
                 <span class="text">Already have an account?</span>
                 <a class="link" [routerLink]="'/pages/auth/login-2'">Login</a>
             </div>
+        </div>
+    </div>
+
+    <div id="register-intro" fxFlex fxHide fxShow.gt-xs>
+        <div class="logo" [@animate]="{ value: '*', params: { scale: '0.2' } }">
+            <img src="assets/images/logos/Final-ai.png" />
+        </div>
+
+        <div
+            class="title"
+            [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }"
+        >
+            Welcome to the Palshown
+        </div>
+
+        <div
+            class="description"
+            [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }"
+        >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            ullamcorper nisl erat, vel convallis elit fermentum pellentesque.
+            Sed mollis velit facilisis facilisis viverra.
         </div>
     </div>
 </div>

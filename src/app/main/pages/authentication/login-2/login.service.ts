@@ -13,6 +13,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   loginUser(payload: LoginReq) {
-    return this.http.post<LoginReq>(`${this.serverApi}api/LoginAPI/Login`, payload)
+    return this.http.post<LoginReq>(`${environment.apiUrl}api/LoginAPI/Login`, payload)
   }
 }

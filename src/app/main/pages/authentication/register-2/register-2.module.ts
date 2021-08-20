@@ -9,10 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { Register2Component } from 'app/main/pages/authentication/register-2/register-2.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes = [
     {
-        path     : 'auth/register-2',
+        path: 'auth/register-2',
         component: Register2Component
     }
 ];
@@ -21,7 +22,7 @@ const routes = [
     declarations: [
         Register2Component
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -29,10 +30,9 @@ const routes = [
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-
+        MatSnackBarModule,
         FuseSharedModule
     ]
 })
-export class Register2Module
-{
+export class Register2Module {
 }

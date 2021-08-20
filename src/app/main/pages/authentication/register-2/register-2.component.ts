@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { RegisterService } from './register.service';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -5,16 +7,16 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
-    selector     : 'register-2',
-    templateUrl  : './register-2.component.html',
-    styleUrls    : ['./register-2.component.scss'],
+    selector: 'register-2',
+    templateUrl: './register-2.component.html',
+    styleUrls: ['./register-2.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class Register2Component implements OnInit, OnDestroy
-{
+export class Register2Component implements OnInit, OnDestroy {
     registerForm: FormGroup;
 
     // Private
@@ -22,19 +24,21 @@ export class Register2Component implements OnInit, OnDestroy
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
-    )
-    {
+        private _formBuilder: FormBuilder,
+        private registerService: RegisterService,
+        private _snackBar: MatSnackBar,
+        private router: Router
+    ) {
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
-                navbar   : {
+                navbar: {
                     hidden: true
                 },
-                toolbar  : {
+                toolbar: {
                     hidden: true
                 },
-                footer   : {
+                footer: {
                     hidden: true
                 },
                 sidepanel: {
@@ -54,29 +58,44 @@ export class Register2Component implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         this.registerForm = this._formBuilder.group({
-            name           : ['', Validators.required],
-            email          : ['', [Validators.required, Validators.email]],
-            password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+            name: ['', Validators.required],
+            username: ['', Validators.required],
+            // email          : ['', [Validators.required, Validators.email]],
+            password: ['', Validators.required],
+            // passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
-        this.registerForm.get('password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(() => {
-                this.registerForm.get('passwordConfirm').updateValueAndValidity();
+        // this.registerForm.get('password').valueChanges
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe(() => {
+        //         this.registerForm.get('passwordConfirm').updateValueAndValidity();
+        //     });
+    }
+
+    regiter() {
+        console.log('this.registerForm.value :>> ', this.registerForm.value);
+
+
+        return this.registerService.registerUser(this.registerForm.value).subscribe(res => {
+            console.log('this.loginForm :>> ', res)
+            this._snackBar.open("Register successfuly", "close", {
+                duration: 4000,
             });
+            this.router.navigateByUrl("/pages/auth/login-2");
+        },
+            err => {
+                console.log('object :>> ', err);
+            })
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -89,30 +108,26 @@ export class Register2Component implements OnInit, OnDestroy
  * @param {AbstractControl} control
  * @returns {ValidationErrors | null}
  */
-export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+// export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
 
-    if ( !control.parent || !control )
-    {
-        return null;
-    }
+//     if (!control.parent || !control) {
+//         return null;
+//     }
 
-    const password = control.parent.get('password');
-    const passwordConfirm = control.parent.get('passwordConfirm');
+//     const password = control.parent.get('password');
+//     const passwordConfirm = control.parent.get('passwordConfirm');
 
-    if ( !password || !passwordConfirm )
-    {
-        return null;
-    }
+//     if (!password || !passwordConfirm) {
+//         return null;
+//     }
 
-    if ( passwordConfirm.value === '' )
-    {
-        return null;
-    }
+//     if (passwordConfirm.value === '') {
+//         return null;
+//     }
 
-    if ( password.value === passwordConfirm.value )
-    {
-        return null;
-    }
+//     if (password.value === passwordConfirm.value) {
+//         return null;
+//     }
 
-    return {passwordsNotMatching: true};
-};
+//     return { passwordsNotMatching: true };
+// };
