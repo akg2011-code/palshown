@@ -1,0 +1,84 @@
+.landPage {
+    background-color: #fff;
+    width: 100%;
+}
+.mat-toolbar {
+    background-color: #fff !important;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
+.logo {
+    img {
+        width: 22rem;
+    }
+}
+
+.example-icon {
+    margin-inline-end: 6rem;
+}
+.btnPrimary {
+    background-color: #4a36b2 !important;
+    color: #fff !important;
+    border: 2px solid #4a36b2 !important;
+}
+.gridContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 5rem;
+    padding-top: 17rem;
+    h1 {
+        font-size: 40px;
+        letter-spacing: 2px;
+        line-height: 70px;
+        color: #332966;
+        font-weight: 700;
+    }
+    p {
+        font-size: 18px;
+        letter-spacing: 1px;
+        line-height: 30px;
+        color: #707070;
+        font-weight: 900;
+    }
+}
+
+.example-button-row {
+    display: table-cell;
+    button {
+        margin-inline-end: 3rem;
+        font-size: 20px;
+        letter-spacing: 1px;
+        line-height: 48px;
+        font-weight: 700;
+        margin-block-end: 2rem;
+    }
+    .btnStroked {
+        color: #4a36b2 !important;
+        border-radius: 10px;
+        background-color: #ffffff;
+        border: 2px solid #4a36b2 !important;
+        -webkit-border-radius: 10px !important;
+        -moz-border-radius: 10px !important;
+        -ms-border-radius: 10px !important;
+        -o-border-radius: 10px !important;
+    }
+}
+.btnBurger {
+    display: none;
+}
+@media only screen and (max-width: 360px) {
+    .gridContainer {
+        grid-template-columns: 100%;
+        padding-top: 3rem;
+    }
+    .navLinks {
+        display: none;
+    }
+    .btnBurger {
+        display: block;
+    }
+    .logo img {
+        width: 16rem;
+    }
+}

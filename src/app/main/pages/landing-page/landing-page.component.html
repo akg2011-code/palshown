@@ -1,0 +1,82 @@
+<section class="landPage">
+    <mat-toolbar>
+      <div class="btnBurger"></div>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                {{ "Features" | translate }}
+            </button>
+            <button mat-menu-item [routerLink]="'/pages/pricing/style-1'">
+                {{ "Pricing" | translate }}
+            </button>
+            <button mat-menu-item [routerLink]="'/pages/auth/login-2'">
+                {{ "Login" | translate }}
+            </button>
+        </mat-menu>
+
+        <span class="logo">
+            <img
+                src="./../../../../assets/images/logos/Final-ai-(2).png"
+                alt="palshown"
+            />
+        </span>
+        <span class="example-spacer"></span>
+        <div class="navLinks">
+            <button
+                mat-icon-button
+                class="example-icon favorite-icon"
+                aria-label="Example icon-button with heart icon"
+            >
+                {{ "Features" | translate }}
+            </button>
+            <button
+                mat-icon-button
+                class="example-icon"
+                aria-label="Example icon-button with share icon"
+                [routerLink]="'/pages/pricing/style-1'"
+            >
+                {{ "Pricing" | translate }}
+            </button>
+            <button
+                mat-icon-button
+                class="example-icon"
+                aria-label="Example icon-button with share icon"
+                [routerLink]="'/pages/auth/login-2'"
+            >
+                {{ "Login" | translate }}
+            </button>
+        </div>
+        <button mat-raised-button class="btnPrimary">
+            {{ "Try Free" | translate }}
+        </button>
+    </mat-toolbar>
+    <div class="gridContainer">
+        <div class="item">
+            <h1>
+                {{ "We will help you to make your team" | translate }}
+            </h1>
+            <p>
+                {{
+                    "No matter your team structure, Palshown  can improve your team engagement, productivity, and retention."
+                        | translate
+                }}
+            </p>
+            <div class="example-button-row">
+                <button mat-raised-button class="btnPrimary">
+                    {{ "Get Started" | translate }}
+                </button>
+                <button mat-stroked-button class="btnStroked">
+                    {{ "BOOK A DEMO" | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="item">
+            <img
+                src="../../../../assets/images/backgrounds/LangingBackground.png"
+                alt="landBg"
+            />
+        </div>
+    </div>
+</section>
