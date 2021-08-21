@@ -60,6 +60,8 @@ export class Register2Component implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         this.registerForm = this._formBuilder.group({
+            loginTypeId: 1,
+            companyId: 1,
             name: ['', Validators.required],
             username: ['', Validators.required],
             // email          : ['', [Validators.required, Validators.email]],
@@ -80,14 +82,19 @@ export class Register2Component implements OnInit, OnDestroy {
         console.log('this.registerForm.value :>> ', this.registerForm.value);
 
 
-        return this.registerService.registerUser(this.registerForm.value).subscribe(res => {
-            console.log('this.loginForm :>> ', res)
-            this._snackBar.open("Register successfuly", "close", {
-                duration: 4000,
-            });
-            this.router.navigateByUrl("/pages/auth/login-2");
-        },
-            err => {
+        return this.registerService.registerUser(this.registerForm.value).subscribe(
+            (res) => {
+                console.log('this.loginForm :>> ', res)
+                this.router.navigateByUrl("/pages/auth/login-2");
+                this._snackBar.open("Register successfuly", "close", {
+                    duration: 4000,
+                });
+            }
+            ,
+            (err) => {
+                this._snackBar.open(err.error, "close", {
+                    duration: 4000,
+                });
                 console.log('object :>> ', err);
             })
     }

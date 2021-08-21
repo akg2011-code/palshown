@@ -194,11 +194,13 @@ login-2 {
                     .text {
                         margin-right: 8px;
                     }
-
-                    .link {
-                    }
                 }
             }
         }
     }
+}
+.login-spinner {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }

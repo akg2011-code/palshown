@@ -70,7 +70,10 @@
                     [disabled]="loginForm.invalid"
                     (click)="login()"
                 >
-                    LOGIN
+                    {{ (loginLoader ? "" : "LOGIN") | translate }}
+                    <div class="login-spinner" *ngIf="loginLoader">
+                        <mat-spinner diameter="24"></mat-spinner>
+                    </div>
                 </button>
             </form>
 

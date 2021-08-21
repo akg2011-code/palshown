@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'login-2',
@@ -14,7 +16,7 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class Login2Component implements OnInit {
     loginForm: FormGroup;
-
+    loginLoader: boolean
     /**
      * Constructor
      *
@@ -24,7 +26,11 @@ export class Login2Component implements OnInit {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private router: Router,
+        private _snackBar: MatSnackBar,
+
+
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -54,6 +60,7 @@ export class Login2Component implements OnInit {
      */
     ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
+            companyId: "1",
             userName: ['', Validators.required],
             password: ['', Validators.required]
         });
@@ -61,8 +68,18 @@ export class Login2Component implements OnInit {
     }
 
     login() {
+        this.loginLoader = true
         return this.loginService.loginUser(this.loginForm.value).subscribe(res => {
-            console.log('this.loginForm :>> ', res)
-        })
+            console.log('res :>> ', res);
+            this.loginLoader = false
+            this.router.navigateByUrl("/pages/profile");
+        },
+            err => {
+                this._snackBar.open(err.error, "close", {
+                    duration: 4000,
+                });
+                this.loginLoader = false
+                console.log('err :>> ', err);
+            })
     }
 }
